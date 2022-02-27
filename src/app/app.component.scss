@@ -1,0 +1,66 @@
+// Whole app
+:host {
+  // To fix the footer to the bottom of the screen or the content
+  box-sizing: border-box;
+  display: block;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  mat-toolbar.header {
+    padding-left: 3rem;
+  }
+  .content {
+    margin: 0.25rem 3rem 0 3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  mat-toolbar.header {
+    justify-content: center;
+  }
+  .content {
+    margin: 0.25rem 0.75rem 0 0.75rem;
+  }
+}
+
+// Header
+mat-toolbar.header {
+  a,
+  a:link,
+  a:visited {
+    color: #333;
+    text-decoration: none;
+  }
+}
+
+// Content
+.content {
+  box-sizing: border-box;
+}
+
+// Footer
+footer {
+  color: #55555588;
+  bottom: 0px;
+  box-sizing: border-box;
+  height: 2.5rem;
+  padding: 0 0 2rem 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+
+  a,
+  a:link,
+  a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+}

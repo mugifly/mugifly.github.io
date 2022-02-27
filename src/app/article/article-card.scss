@@ -1,0 +1,76 @@
+// Article card
+mat-card {
+  padding: 2rem 1rem 2rem 1rem;
+  margin-bottom: 1em;
+
+  // Title
+  mat-card-title {
+    color: #111;
+    margin: 0 0 0 1rem;
+  }
+
+  // Metadatas
+  mat-card-subtitle {
+    margin-top: 1rem;
+
+    // Updated date
+    .date {
+      margin: 1.2rem 3rem 0 1.25rem;
+    }
+
+    // Tags
+    ul.tags {
+      display: inline-block;
+      list-style: none;
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+
+      li {
+        display: inline-block;
+        margin-right: 0.7rem;
+      }
+    }
+  }
+
+  // Content of article
+  mat-card-content {
+    padding: 2rem;
+
+    // Captions
+    h1 {
+      margin-top: 2rem;
+    }
+
+    // Code-blocks
+    pre {
+      background-color: #f5f2f0;
+      margin: 0 0 1.5rem 0;
+      overflow: auto;
+      padding: 1rem;
+
+      code:not([class*="language-"]) {
+        background-color: none;
+        padding: 0 0 0 0;
+      }
+    }
+    code:not([class*="language-"]) {
+      background-color: #f5f2f0;
+      padding: 0 0.25rem 0 0.25rem;
+    }
+
+    // Images
+    img {
+      box-shadow: 0px 0px 3px #aaaaaaaa;
+      margin: 1rem 0 1rem 0;
+      max-width: 95%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  mat-card {
+    mat-card-content {
+      padding: 1rem;
+    }
+  }
+}
