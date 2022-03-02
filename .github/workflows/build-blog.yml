@@ -1,0 +1,15 @@
+name: Build blog
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          deploy-branch: gh-pages
+      - name: Scully Publish
+        uses: cmgriffing/scully-gh-pages-action@v9
