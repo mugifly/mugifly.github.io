@@ -1,27 +1,14 @@
-<div
-  class="article-cards"
-  fxLayout="row"
-  fxLayout.xs="column"
-  fxFlexFill
-  fxLayoutGap="2rem"
->
+<div class="article-cards" fxLayout="row" fxLayout.xs="column" fxFlexFill fxLayoutGap="2rem">
   <!-- Article cards-->
-  <a
-    [routerLink]="page.route"
-    *ngFor="let page of links$ | async"
-    fxFlex="33%"
-    fxFlex.xs="100%"
-  >
+  <a [routerLink]="page.route" *ngFor="let page of links$ | async" fxFlex="33%" fxFlex.xs="100%">
     <mat-card>
       <!-- Title -->
-      <mat-card-title>
-        {{ page.title }}
-      </mat-card-title>
+      <mat-card-title> {{ page.title }} </mat-card-title>
       <!---->
 
       <mat-card-subtitle>
         <!-- Updated date -->
-        <span class="date">{{ page?.created_at | date: "yyyy/MM/dd" }}</span>
+        <span class="date">{{ page?.created_at | date: 'yyyy/MM/dd' }}</span>
         <!---->
 
         <!-- Tags -->
