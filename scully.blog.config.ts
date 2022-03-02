@@ -4,7 +4,7 @@ import { ScullyConfig, registerPlugin } from '@scullyio/scully';
 import '@scullyio/scully-plugin-puppeteer';
 
 import './scully/plugins/esa-route-process/plugin';
-import './scully/plugins/plugin';
+import './scully/plugins/esa-post-process/plugin';
 
 export const config: ScullyConfig = {
   projectRoot: './src',

@@ -10,6 +10,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-          deploy-branch: gh-pages
       - name: Scully Publish
-        uses: cmgriffing/scully-gh-pages-action@v9
+        uses: cmgriffing/scully-gh-pages-action@089c8e948312fa3ad94d1ebc9d763df442c839a8
+        with:
+          access-token: ${{ secrets.ACCESS_TOKEN }}
+          deploy-branch: gh-pages
