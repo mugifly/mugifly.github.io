@@ -2,6 +2,22 @@
   <a routerLink="/">
     <span>Masanori のプログラミング日誌＋＋</span>
   </a>
+  <span class="spacer"></span>
+
+  <!-- Search input -->
+  <mat-form-field class="search-input" appearance="legacy" floatLabel="always">
+    <mat-label></mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input
+      type="text"
+      name="search-input"
+      matInput
+      placeholder="検索"
+      [(ngModel)]="searchQuery"
+      (change)="onChangeSearchInput($event)"
+    />
+  </mat-form-field>
+  <!---->
 </mat-toolbar>
 
 <div class="content">
@@ -12,6 +28,5 @@
   Built with
   <a href="https://scully.io/" target="_blank" rel="noopener">Scully</a>
   &nbsp; / &nbsp; &copy;
-  <a href="https://github.com/mugifly" target="_blank" rel="noopener">mugifly</a
-  >.
+  <a href="https://github.com/mugifly" target="_blank" rel="noopener">mugifly</a>.
 </footer>

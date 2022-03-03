@@ -4,9 +4,15 @@ A personal blog about software development built with [Scully](https://scully.io
 
 https://mugifly.github.io/
 
-## Custom plugins for Scully + esa.io
+## Custom plugins for Scully
 
-I made custom plugins for Scully to fix some problems between Scully and esa.
+## [lunr](https://github.com/mugifly/mugifly.github.io/blob/master/scully/plugins/lunr/plugin.ts)
+
+Full-text search with [Lunr.js](https://github.com/olivernn/lunr.js/) on Scully.
+
+## Custom plugins for Scully with esa.io
+
+I made custom plugins for Scully to fix some problems between Scully + esa.io.
 
 ## [esa-post-process](https://github.com/mugifly/mugifly.github.io/blob/master/scully/plugins/esa-post-process/plugin.ts)
 

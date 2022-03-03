@@ -10,7 +10,7 @@
 
 @media screen and (min-width: 768px) {
   mat-toolbar.header {
-    padding-left: 3rem;
+    padding: 0 3rem 0 3rem;
   }
   .content {
     margin: 0.25rem 3rem 0 3rem;
@@ -33,6 +33,20 @@ mat-toolbar.header {
   a:visited {
     color: #333;
     text-decoration: none;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  // Search form
+  .search-input {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+
+    ::ng-deep .mat-form-field-infix input {
+      margin: 0 0 0.3rem 0.5rem;
+    }
   }
 }
 

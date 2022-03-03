@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ScullyRoute, ScullyRoutesService } from '@scullyio/ng-lib';
-import { map } from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { map, repeat } from 'rxjs/operators';
+import * as lunr from 'lunr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss', '../article/article-card.scss'],
 })
-export class HomeComponent implements OnInit {
-  public filteredTagName?: string;
+export class HomeComponent implements OnInit, OnDestroy {
+  public filter: { tag: string | null; query: string | null } = {
+    tag: null,
+    query: null,
+  };
+
+  public queryParamsSubscription: Subscription | undefined;
+  public matchedRoutesByQuery?: string[];
+  private lunrIndexJson: any = null;
 
   public tags?: string[];
 
@@ -20,10 +31,9 @@ export class HomeComponent implements OnInit {
         // Exclude route of top page
         if (route.route === '/') return false;
         // Exclude route for filtering with tag
-        console.log(route.tags, this.filteredTagName);
         if (
-          this.filteredTagName &&
-          (!route.tags || !(route.tags as string[]).map((tag) => tag.toLowerCase()).includes(this.filteredTagName))
+          this.filter.tag &&
+          (!route.tags || !(route.tags as string[]).map((tag) => tag.toLowerCase()).includes(this.filter.tag))
         )
           return false;
         return true;
@@ -31,13 +41,52 @@ export class HomeComponent implements OnInit {
     }),
   );
 
-  constructor(private scully: ScullyRoutesService, private route: ActivatedRoute) {}
+  constructor(
+    private scully: ScullyRoutesService,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private location: Location,
+  ) {}
 
-  ngOnInit(): void {
-    this.filteredTagName = this.route.snapshot.params.tagName
+  async ngOnInit() {
+    this.filter.tag = this.route.snapshot.params.tagName
       ? (this.route.snapshot.params.tagName as string).toLowerCase()
-      : undefined;
+      : null;
+
+    this.queryParamsSubscription = this.route.queryParams.subscribe(async (params) => {
+      this.filter.query = params.query;
+      if (!this.filter.query) return;
+      await this.findArticles(this.filter.query);
+    });
+
     this.tags = [];
+  }
+
+  async ngOnDestroy() {
+    if (this.queryParamsSubscription) this.queryParamsSubscription.unsubscribe();
+  }
+
+  async findArticles(query: string) {
+    const matchedRoutesByQuery = [];
+
+    if (!this.lunrIndexJson) {
+      const lunrIndexUrl = this.location.prepareExternalUrl('assets/lunr-index.json');
+      this.lunrIndexJson = await this.http.get(lunrIndexUrl).toPromise();
+      if (!this.lunrIndexJson) return;
+    }
+
+    const lunrIndex = lunr.Index.load(this.lunrIndexJson);
+    const items = lunrIndex.search(query);
+    console.log('findArticles', items);
+    if (items.length === 0) {
+      this.matchedRoutesByQuery = [];
+    }
+
+    for (const item of items) {
+      matchedRoutesByQuery.push(item.ref);
+    }
+
+    this.matchedRoutesByQuery = matchedRoutesByQuery;
   }
 
   getAvailableTags(routes: ScullyRoute[]): string[] {
