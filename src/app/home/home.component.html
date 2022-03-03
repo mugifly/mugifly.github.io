@@ -1,3 +1,16 @@
+<div class="filter-tag" *ngIf="filteredTagName">
+  <mat-icon>tag</mat-icon>
+  <!-- Tags -->
+  <mat-chip-list aria-label="tag">
+    <a *ngFor="let tagName of tags" [routerLink]="['/tags', tagName]">
+      <mat-chip [color]="tagName == filteredTagName ? 'primary' : ''" [selected]="tagName == filteredTagName">
+        {{ tagName }}
+      </mat-chip>
+    </a>
+  </mat-chip-list>
+  <!----->
+</div>
+
 <div class="article-cards" fxLayout="row" fxLayout.xs="column" fxFlexFill fxLayoutGap="2rem">
   <!-- Article cards-->
   <a [routerLink]="page.route" *ngFor="let page of links$ | async" fxFlex="33%" fxFlex.xs="100%">
@@ -13,8 +26,8 @@
 
         <!-- Tags -->
         <ul class="tags">
-          <li *ngFor="let tag of page?.tags?.split(',')">
-            {{ tag }}
+          <li *ngFor="let tag of page?.tags">
+            <a [routerLink]="['/tags', tag]">{{ tag }}</a>
           </li>
         </ul>
         <!---->

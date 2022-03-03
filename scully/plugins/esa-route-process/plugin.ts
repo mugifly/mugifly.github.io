@@ -9,6 +9,11 @@ const Plugin = async (routes: HandledRoute[], config = {}): Promise<HandledRoute
       route.route = route.route.replace(/\.html$/, '');
     }
 
+    // Convert tags string to array
+    if (route.data.tags && typeof route.data.tags == 'string') {
+      route.data.tags = route.data.tags.split(/\s*,\s*/);
+    }
+
     return route;
   });
 

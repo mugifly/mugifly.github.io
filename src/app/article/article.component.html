@@ -7,13 +7,13 @@
 
   <mat-card-subtitle>
     <!-- Updated date -->
-    <span class="date">{{ page.created_at | date: "yyyy/MM/dd" }}</span>
+    <span class="date">{{ page.created_at | date: 'yyyy/MM/dd' }}</span>
     <!---->
 
     <!-- Tags -->
     <ul class="tags">
-      <li *ngFor="let tag of page.tags?.split(',')">
-        {{ tag }}
+      <li *ngFor="let tag of page.tags">
+        <a [routerLink]="['/tags', tag]">{{ tag }}</a>
       </li>
     </ul>
     <!---->
