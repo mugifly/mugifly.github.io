@@ -8,7 +8,7 @@ https://mugifly.github.io/
 
 I made custom plugins for Scully to fix some problems between Scully and esa.
 
-## [esa-post-process](https://github.com/mugifly/mugifly.github.io/blob/master/scully/plugins/esa-post-process/plugin.ts)
+### [esa-post-process](https://github.com/mugifly/mugifly.github.io/blob/master/scully/plugins/esa-post-process/plugin.ts)
 
 In the esa.io code block, you can use markdown syntax to attach filenames (e.g., `foo.html`, `src/foo.js`).
 On the other hand, the Scully syntax highlighting and markdown parser can only recognize its extension (e.g., `html`, `js`), which prevents highlighting from working properly.
@@ -16,7 +16,7 @@ On the other hand, the Scully syntax highlighting and markdown parser can only r
 This plugin fixes the codeblocks to correctly recognized by syntax highlighter.
 In addition, It appends a filename label at the top left of the code block.
 
-## [esa-route-process](https://github.com/mugifly/mugifly.github.io/blob/master/scully/plugins/esa-route-process/plugin.ts)
+### [esa-route-process](https://github.com/mugifly/mugifly.github.io/blob/master/scully/plugins/esa-route-process/plugin.ts)
 
 esa.io's GitHub integration makes it easy to push articles to our GitHub repository.
 However, the pushed filenames will be strange characters, such as `10.html.md`.
@@ -24,6 +24,13 @@ However, the pushed filenames will be strange characters, such as `10.html.md`.
 Therefore, Scully occurs the problem of creating static HTML with strange names, such as `10.html.html`.
 
 This plugin fixes this problem.
+
+## Build
+
+In development, it is convenient to execute the following commands at the same time.
+
+- `npm run watch` (Angular)
+- `npx scully --watch` (Scully)
 
 ## Author
 
