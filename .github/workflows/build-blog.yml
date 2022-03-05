@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        ref: master
+        with:
+          ref: master
       - name: Fetch articles from blog branch
         run: |
           git fetch
@@ -19,7 +20,7 @@ jobs:
           ls -l blog/
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
       - name: Scully Publish
         uses: cmgriffing/scully-gh-pages-action@089c8e948312fa3ad94d1ebc9d763df442c839a8
         with:
