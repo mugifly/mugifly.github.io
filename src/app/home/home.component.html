@@ -1,9 +1,9 @@
-<div class="filter-tag" *ngIf="filteredTagName">
+<div class="filter-tag" *ngIf="filter.tag">
   <mat-icon>tag</mat-icon>
   <!-- Tags -->
   <mat-chip-list aria-label="tag">
     <a *ngFor="let tagName of tags" [routerLink]="['/tags', tagName]">
-      <mat-chip [color]="tagName == filteredTagName ? 'primary' : ''" [selected]="tagName == filteredTagName">
+      <mat-chip [color]="tagName == filter.tag ? 'primary' : ''" [selected]="tagName == filter.tag">
         {{ tagName }}
       </mat-chip>
     </a>
@@ -11,30 +11,38 @@
   <!----->
 </div>
 
+<div class="filter-query" *ngIf="filter.query">
+  <mat-icon>search</mat-icon>
+  <span class="query">{{ filter.query }}</span> の検索結果
+  <!----->
+</div>
+
 <div class="article-cards" fxLayout="row" fxLayout.xs="column" fxFlexFill fxLayoutGap="2rem">
   <!-- Article cards-->
-  <a [routerLink]="page.route" *ngFor="let page of links$ | async" fxFlex="33%" fxFlex.xs="100%">
-    <mat-card>
-      <!-- Title -->
-      <mat-card-title> {{ page.title }} </mat-card-title>
-      <!---->
-
-      <mat-card-subtitle>
-        <!-- Updated date -->
-        <span class="date">{{ page?.created_at | date: 'yyyy/MM/dd' }}</span>
+  <ng-container *ngFor="let page of links$ | async as links">
+    <a [routerLink]="page.route" fxFlex="33%" fxFlex.xs="100%">
+      <mat-card>
+        <!-- Title -->
+        <mat-card-title> {{ page.title }}</mat-card-title>
         <!---->
 
-        <!-- Tags -->
-        <ul class="tags">
-          <li *ngFor="let tag of page?.tags">
-            <a [routerLink]="['/tags', tag]">{{ tag }}</a>
-          </li>
-        </ul>
-        <!---->
+        <mat-card-subtitle>
+          <!-- Updated date -->
+          <span class="date">{{ page?.created_at | date: 'yyyy/MM/dd' }}</span>
+          <!---->
 
-        <br style="clear: both" />
-      </mat-card-subtitle>
-    </mat-card>
-  </a>
+          <!-- Tags -->
+          <ul class="tags">
+            <li *ngFor="let tag of page?.tags">
+              <a [routerLink]="['/tags', tag]">{{ tag }}</a>
+            </li>
+          </ul>
+          <!---->
+
+          <br style="clear: both" />
+        </mat-card-subtitle>
+      </mat-card>
+    </a>
+  </ng-container>
   <!---->
 </div>

@@ -1,54 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ScullyRoute, ScullyRoutesService } from '@scullyio/ng-lib';
-import { map } from 'rxjs/operators';
+import { combineLatestWith, map, startWith, switchMap } from 'rxjs/operators';
+import { ArticleHelperService } from '../article/article-helper.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss', '../article/article-card.scss'],
 })
-export class HomeComponent implements OnInit {
-  public filteredTagName?: string;
+export class HomeComponent implements OnInit, OnDestroy {
+  // Conditions for filtering articles
+  public filter: { tag: string | null; query: string | null } = {
+    tag: null,
+    query: null,
+  };
 
-  public tags?: string[];
+  // Available tags
+  public tags?: string[] = [];
 
+  // Available articles
   public links$ = this.scully.available$.pipe(
-    map((routes) => {
-      this.tags = this.getAvailableTags(routes);
-      return routes.filter((route) => {
-        // Exclude route of top page
-        if (route.route === '/') return false;
-        // Exclude route for filtering with tag
-        console.log(route.tags, this.filteredTagName);
-        if (
-          this.filteredTagName &&
-          (!route.tags || !(route.tags as string[]).map((tag) => tag.toLowerCase()).includes(this.filteredTagName))
-        )
-          return false;
-        return true;
-      });
+    startWith(null),
+    // Remove root page
+    map((pages) => pages?.filter((page) => page.route !== '/')),
+    // Get tags from all articles
+    map((pages) => {
+      if (!pages) return [];
+      this.tags = this.articleSearch.getAvailableTags(pages);
+      return pages;
+    }),
+    // Filter with params and query params
+    combineLatestWith(this.route.params.pipe(startWith(null)), this.route.queryParams.pipe(startWith(null))),
+    switchMap((v: any, idx: number) => {
+      let pages: ScullyRoute[] = v[0];
+      const params: { tagName: string } | null = v[1];
+      const queryParams: { query: string } | null = v[2];
+
+      if (!pages) return [];
+
+      if (params && params.tagName) {
+        // Filter with tag
+        pages = pages.filter((page: ScullyRoute) => page.tags.includes(params.tagName));
+      }
+
+      if (queryParams && queryParams.query) {
+        // Filter with query (Full-text search)
+        this.filter.query = queryParams.query;
+        return this.articleSearch.findArticlesByQuery(queryParams.query).then((matchedRoutes) => {
+          pages = pages.filter((page: ScullyRoute) => matchedRoutes.includes(page.route));
+          return pages;
+        });
+      } else {
+        this.filter.query = null;
+      }
+
+      return [pages];
     }),
   );
 
-  constructor(private scully: ScullyRoutesService, private route: ActivatedRoute) {}
+  constructor(
+    private scully: ScullyRoutesService,
+    private route: ActivatedRoute,
+    private articleSearch: ArticleHelperService,
+  ) {}
 
-  ngOnInit(): void {
-    this.filteredTagName = this.route.snapshot.params.tagName
+  async ngOnInit() {
+    this.filter.tag = this.route.snapshot.params.tagName
       ? (this.route.snapshot.params.tagName as string).toLowerCase()
-      : undefined;
-    this.tags = [];
+      : null;
   }
 
-  getAvailableTags(routes: ScullyRoute[]): string[] {
-    const tags: { [key: string]: boolean } = {};
-    routes.map((route) => {
-      if (!route.tags) return;
-      route.tags.map((tagName: string) => {
-        tags[tagName.toLowerCase()] = true;
-      });
-    });
-
-    return Object.keys(tags);
-  }
+  async ngOnDestroy() {}
 }

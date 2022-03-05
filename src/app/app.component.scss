@@ -8,19 +8,55 @@
   padding-bottom: 2rem;
 }
 
+// Whole app (for PC)
 @media screen and (min-width: 768px) {
   mat-toolbar.header {
-    padding-left: 3rem;
+    padding: 0 3rem 0 3rem;
+
+    .search-toggle-btn {
+      display: none;
+    }
+    .search-input {
+      display: block;
+      margin-right: 1rem;
+    }
   }
+
   .content {
     margin: 0.25rem 3rem 0 3rem;
   }
 }
 
+// Whole app (for mobile)
 @media screen and (max-width: 768px) {
   mat-toolbar.header {
     justify-content: center;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+
+    .search-toggle-btn {
+      display: block;
+    }
+    .search-input {
+      display: none;
+    }
   }
+
+  mat-toolbar.header.show-search-input {
+    .site-name {
+      display: none;
+      margin-left: 0.5rem;
+    }
+    .spacer {
+      display: none;
+    }
+    .search-input {
+      display: block;
+      flex: 100;
+      margin-right: 0.5rem;
+    }
+  }
+
   .content {
     margin: 0.25rem 0.75rem 0 0.75rem;
   }
@@ -33,6 +69,26 @@ mat-toolbar.header {
   a:visited {
     color: #333;
     text-decoration: none;
+  }
+
+  .site-name {
+    span {
+      vertical-align: middle;
+    }
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  // Search form
+  .search-input {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+
+    ::ng-deep .mat-form-field-infix input {
+      margin: 0 0 0.3rem 0.5rem;
+    }
   }
 }
 
