@@ -1,12 +1,21 @@
 name: Build blog
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - blog
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
+      - name: Fetch articles from blog branch
+        run: |
+          git fetch
+          git checkout origin/blog -- blog
+          ls -l blog/
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
