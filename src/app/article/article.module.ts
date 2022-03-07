@@ -9,9 +9,10 @@ import { HighlightService } from './highlight.service';
 
 import { ArticleRoutingModule } from './article-routing.module';
 import { ArticleComponent } from './article.component';
+import { ShareButtonComponent } from './share-button.component';
 
 @NgModule({
-  declarations: [ArticleComponent],
+  declarations: [ArticleComponent, ShareButtonComponent],
   imports: [
     CommonModule,
     ScullyLibModule,

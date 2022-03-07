@@ -1,0 +1,10 @@
+mat-card {
+  mat-card-content {
+    padding-bottom: 0 !important;
+  }
+
+  ::ng-deep app-share-button {
+    justify-content: right;
+    width: 100%;
+  }
+}
