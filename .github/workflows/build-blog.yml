@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        ref: master
+        with:
+          ref: master
       - name: Fetch articles from blog branch
         run: |
           git fetch
