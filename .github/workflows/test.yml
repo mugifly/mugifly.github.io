@@ -1,15 +1,13 @@
 name: Test
 
 on:
-  - push
+  push:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: master
       - name: Fetch articles from blog branch
         run: |
           git fetch
@@ -23,7 +21,8 @@ jobs:
           npm install
         env:
           CI: true
-      - name: 'Test build'
+      - name: 'Test to build blog'
         run: |
           npm run build
           npx scully --scanRoutes
+      - uses: ArtiomTr/jest-coverage-report-action@cab9a826443a9e21de232191d22d372cb2a3381c
