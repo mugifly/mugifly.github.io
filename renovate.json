@@ -1,0 +1,9 @@
+{
+  "extends": ["config:base", "github>lacolaco/renovate-config:ng-update"],
+  "packageRules": [
+    {
+      "groupName": "Scully",
+      "matchPackagePrefixes": ["@scullyio/"]
+    }
+  ]
+}
