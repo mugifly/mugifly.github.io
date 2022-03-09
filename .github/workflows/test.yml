@@ -18,7 +18,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
+      - name: 'Install modules'
+        run: |
+          npm install
+        env:
+          CI: true
       - name: 'Test build'
         run: |
-          npm run build:check
-          npm run scully
+          npm run build
+          npx scully --scanRoutes
