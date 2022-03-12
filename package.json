@@ -30,7 +30,7 @@
     "lunr": "2.3.9",
     "lunr-languages": "1.9.0",
     "prismjs": "1.27.0",
-    "rxjs": "7.5.4",
+    "rxjs": "7.5.5",
     "tslib": "2.3.1",
     "zone.js": "0.11.5"
   },
