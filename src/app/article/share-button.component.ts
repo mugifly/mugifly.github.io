@@ -25,32 +25,44 @@ export class ShareButtonComponent implements OnInit, AfterViewInit {
     switch (socialService) {
       case 'twitter':
         code = `
-        window.twttr = (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0],
-            t = window.twttr || {};
-          if (d.getElementById(id)) return t;
-          js = d.createElement(s);
-          js.id = id;
-          js.src = "https://platform.twitter.com/widgets.js";
-          fjs.parentNode.insertBefore(js, fjs);
-          t._e = [];
-          t.ready = function(f) {
-            t._e.push(f);
-          };
-          return t;
-        }(document, "script", "twitter-wjs"));
+
+        if (window.twttr) {
+
+          window.twttr.widgets.load();
+
+        } else {
+
+          window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+              t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            t._e = [];
+            t.ready = function(f) {
+              t._e.push(f);
+            };
+            return t;
+          }(document, "script", "twitter-wjs"));
+        }
         `;
         break;
       case 'pocket':
         code = `
+
         (function(d,i){
-          if(!d.getElementById(i)){
-            var j=d.createElement("script");
-            j.id=i;
-            j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";
-            var w=d.getElementById(i);
-            d.body.appendChild(j);
+          if(d.getElementById(i)){
+            d.getElementById(i).remove();
           }
+
+          var j=d.createElement("script");
+          j.id=i;
+          j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";
+          var w=d.getElementById(i);
+          d.body.appendChild(j);
+
         })(document,"pocket-btn-js");
         `;
         break;
