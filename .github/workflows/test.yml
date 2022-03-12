@@ -13,7 +13,7 @@ jobs:
           git fetch
           git checkout origin/blog -- blog
           ls -l blog/
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
       - name: 'Install modules'
@@ -25,4 +25,8 @@ jobs:
         run: |
           npm run build
           npx scully --scanRoutes
-      - uses: ArtiomTr/jest-coverage-report-action@cab9a826443a9e21de232191d22d372cb2a3381c
+      - uses: mattallty/jest-github-action@43bbcd073fa43a927322f188220b6592acae003b
+        with:
+          coverage-comment: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

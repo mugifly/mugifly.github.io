@@ -18,11 +18,11 @@ jobs:
           git fetch
           git checkout origin/blog -- blog
           ls -l blog/
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
       - name: Scully Publish
-        uses: cmgriffing/scully-gh-pages-action@089c8e948312fa3ad94d1ebc9d763df442c839a8
+        uses: cmgriffing/scully-gh-pages-action@7b77d24497dacdcf03e3f7fcf3efe6e5e0893cac
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           deploy-branch: gh-pages

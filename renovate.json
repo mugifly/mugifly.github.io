@@ -1,9 +1,17 @@
 {
+  "branchConcurrentLimit": 5,
   "extends": ["config:base", "github>lacolaco/renovate-config:ng-update"],
+  "labels": ["dependencies"],
+  "patch": {
+    "automerge": true
+  },
   "packageRules": [
     {
       "groupName": "Scully",
       "matchPackagePrefixes": ["@scullyio/"]
     }
-  ]
+  ],
+  "reviewers": ["mugifly"],
+  "schedule": ["every weekend"],
+  "timezone": "Asia/Tokyo"
 }
