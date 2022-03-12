@@ -15,6 +15,10 @@
     mat-chip {
       cursor: pointer;
     }
+
+    a {
+      text-decoration: none;
+    }
   }
 }
 
@@ -35,17 +39,29 @@
 }
 
 // Article card
-a mat-card {
+mat-card {
+  position: relative;
   transition: box-shadow 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-a mat-card:hover {
+mat-card:hover {
   box-shadow: 0px 5px 6px #ccccccaa;
 }
 
-// Link of Article card
-a,
-a:visited mat-card {
-  color: #111;
+mat-card a.overlay-link {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+mat-card .tags {
+  position: relative;
+  pointer-events: none;
+}
+
+mat-card .tags a {
+  pointer-events: all;
   text-decoration: none;
 }

@@ -20,29 +20,30 @@
 <div class="article-cards" fxLayout="row" fxLayout.xs="column" fxFlexFill fxLayoutGap="2rem">
   <!-- Article cards-->
   <ng-container *ngFor="let page of links$ | async as links">
-    <a [routerLink]="page.route" fxFlex="33%" fxFlex.xs="100%">
-      <mat-card>
-        <!-- Title -->
-        <mat-card-title> {{ page.title }}</mat-card-title>
+    <mat-card fxFlex="33%" fxFlex.xs="100%">
+      <!-- Link to article -->
+      <a class="overlay-link" [routerLink]="page.route"></a>
+
+      <!-- Title -->
+      <mat-card-title> {{ page.title }}</mat-card-title>
+      <!---->
+
+      <mat-card-subtitle>
+        <!-- Updated date -->
+        <span class="date">{{ page?.created_at | date: 'yyyy/MM/dd' }}</span>
         <!---->
 
-        <mat-card-subtitle>
-          <!-- Updated date -->
-          <span class="date">{{ page?.created_at | date: 'yyyy/MM/dd' }}</span>
-          <!---->
+        <!-- Tags -->
+        <ul class="tags">
+          <li *ngFor="let tag of page?.tags">
+            <a [routerLink]="['/tags', tag]">{{ tag }}</a>
+          </li>
+        </ul>
+        <!---->
 
-          <!-- Tags -->
-          <ul class="tags">
-            <li *ngFor="let tag of page?.tags">
-              <a [routerLink]="['/tags', tag]">{{ tag }}</a>
-            </li>
-          </ul>
-          <!---->
-
-          <br style="clear: both" />
-        </mat-card-subtitle>
-      </mat-card>
-    </a>
+        <br style="clear: both" />
+      </mat-card-subtitle>
+    </mat-card>
   </ng-container>
   <!---->
 </div>
