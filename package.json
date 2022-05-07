@@ -38,7 +38,7 @@
     "@angular-devkit/build-angular": "12.2.17",
     "@angular/cli": "12.2.17",
     "@angular/compiler-cli": "12.2.16",
-    "@types/jest": "27.4.1",
+    "@types/jest": "27.5.0",
     "@types/lunr": "2.3.4",
     "@types/node": "16.11.33",
     "jest": "27.5.1",
