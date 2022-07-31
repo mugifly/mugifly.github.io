@@ -25,7 +25,7 @@ jobs:
         run: |
           npm run build
           npx scully --scanRoutes
-      - uses: mattallty/jest-github-action@43bbcd073fa43a927322f188220b6592acae003b
+      - uses: mattallty/jest-github-action@12c8c9a48ae4543fdcf5faa4d126e922d69783a8
         with:
           coverage-comment: false
         env:
