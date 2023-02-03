@@ -1,0 +1,19 @@
+{
+  "name": "scully-plugin-esa",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^12.2.0",
+    "@angular/core": "^12.2.0",
+    "jsdom": "^21.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "main": "bundles/scully-plugin-esa.umd.js",
+  "module": "fesm2015/scully-plugin-esa.js",
+  "es2015": "fesm2015/scully-plugin-esa.js",
+  "esm2015": "esm2015/scully-plugin-esa.js",
+  "fesm2015": "fesm2015/scully-plugin-esa.js",
+  "typings": "scully-plugin-esa.d.ts",
+  "sideEffects": false
+}
