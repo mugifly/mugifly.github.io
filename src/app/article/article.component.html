@@ -1,13 +1,11 @@
 <mat-card *ngIf="page$ | async as page">
   <!-- Title -->
-  <mat-card-title>
-    {{ page.title }}
-  </mat-card-title>
+  <mat-card-title> {{ page.title }}</mat-card-title>
   <!---->
 
   <mat-card-subtitle>
     <!-- Updated date -->
-    <span class="date">{{ page.created_at | date: 'yyyy/MM/dd' }}</span>
+    <span class="date">{{ page.created_at | date : 'yyyy/MM/dd' }}</span>
     <!---->
 
     <!-- Tags -->

@@ -1,0 +1,32 @@
+name: Build lib
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+        env:
+          CI: true
+
+      - name: Build module
+        run: |
+          REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
+          npm run ng build -- scully-plugin-esa
+      - name: Upload library to library branch
+        uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
+        with:
+          branch: library
+          folder: dist/scully-plugin-esa/

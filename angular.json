@@ -82,6 +82,37 @@
           }
         }
       }
+    },
+    "scully-plugin-esa": {
+      "projectType": "library",
+      "root": "projects/scully-plugin-esa",
+      "sourceRoot": "projects/scully-plugin-esa/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/scully-plugin-esa/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/scully-plugin-esa/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/scully-plugin-esa/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/scully-plugin-esa/src/test.ts",
+            "tsConfig": "projects/scully-plugin-esa/tsconfig.spec.json",
+            "karmaConfig": "projects/scully-plugin-esa/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "blog"

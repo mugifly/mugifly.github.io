@@ -3,7 +3,7 @@ import { ScullyConfig, setPluginConfig } from '@scullyio/scully';
 /** this loads the default render plugin, remove when switching to something else. */
 import '@scullyio/scully-plugin-puppeteer';
 
-import 'scully-plugin-esa';
+import './dist/scully-plugin-esa';
 import './scully/plugins/lunr/plugin';
 
 // Full-text search with Lunr
@@ -22,6 +22,7 @@ export const config: ScullyConfig = {
   projectRoot: './src',
   projectName: 'blog',
   outDir: './dist/static',
+  reloadPort: 18080,
   routes: {
     '/articles/:slug': {
       type: 'contentFolder',
