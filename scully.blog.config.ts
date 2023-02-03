@@ -3,8 +3,7 @@ import { ScullyConfig, setPluginConfig } from '@scullyio/scully';
 /** this loads the default render plugin, remove when switching to something else. */
 import '@scullyio/scully-plugin-puppeteer';
 
-import './scully/plugins/esa-route-process/plugin';
-import './scully/plugins/esa-post-process/plugin';
+import 'scully-plugin-esa';
 import './scully/plugins/lunr/plugin';
 
 // Full-text search with Lunr
