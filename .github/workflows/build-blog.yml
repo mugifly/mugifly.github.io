@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '16'
       - name: Scully Publish
-        uses: cmgriffing/scully-gh-pages-action@7b77d24497dacdcf03e3f7fcf3efe6e5e0893cac
+        uses: cmgriffing/scully-gh-pages-action@c3b5b4bc440ffbdacc7e6430534ace82bd42899d
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           deploy-branch: gh-pages
