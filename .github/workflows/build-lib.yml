@@ -26,7 +26,7 @@ jobs:
           REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
           npm run ng build -- scully-plugin-esa
       - name: Upload library to library branch
-        uses: JamesIves/github-pages-deploy-action@ba1486788b0490a235422264426c45848eac35c6
+        uses: JamesIves/github-pages-deploy-action@80d7a811aac4bac0e96dc7ad3357e17725ab9e70
         with:
           branch: library
           folder: dist/scully-plugin-esa/
