@@ -44,7 +44,7 @@
     "@angular/cli": "12.2.18",
     "@angular/compiler-cli": "12.2.16",
     "@types/jest": "27.5.2",
-    "@types/lunr": "2.3.4",
+    "@types/lunr": "2.3.7",
     "@types/marked": "^4.0.8",
     "@types/node": "^16.11.56",
     "concurrently": "^7.6.0",
