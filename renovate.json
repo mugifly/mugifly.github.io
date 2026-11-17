@@ -1,4 +1,5 @@
 {
+  "enabled": false,
   "branchConcurrentLimit": 5,
   "extends": ["config:base", "github>lacolaco/renovate-config:ng-update"],
   "labels": ["dependencies"],
